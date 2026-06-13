@@ -3898,7 +3898,7 @@ results_t1_final = (
 print("=" * 60)
 print("TASK 1 - FINAL RESULTS - TEKNON HOLDOUT")
 print("=" * 60)
-display(results_t1_final)
+print(results_t1_final)
 
 
 # ============================================================
@@ -4010,4 +4010,4 @@ results_t2_final = (
 print("=" * 60)
 print("TASK 2 - FINAL RESULTS - TEKNON HOLDOUT")
 print("=" * 60)
-display(results_t2_final)
+print(results_t2_final)
