@@ -265,7 +265,6 @@ subkeys = [
     "OTorigin",
 ]
 
-# OTorigin is 1 if "OT" is in the SOO_chamber, otherwise 0. This is not the final RVOT/LVOT origin label, which you will have to build! :)
 print(teknon.keys())
 clinical_df = pd.DataFrame(columns=subkeys)
 
@@ -342,7 +341,7 @@ train_set["SOO_std"] = train_set["SOO"].apply(standardize_soo)
 # Comprovem els nous recomptes
 print(train_set["SOO_std"].value_counts())
 
-# Valors no mapejats -- els eliminem
+# Valors no mapejats els eliminem
 print("\nValors NO mapejats:")
 print(train_set[train_set["SOO_std"].isna()]["SOO"].value_counts())
 
@@ -383,7 +382,6 @@ import pandas as pd
 import scipy.stats as stats
 
 # 1. Configuració de la divisió de dades
-# Suposem que 'SOO' és el teu target. Canvia-ho si té un altre nom.
 target_col = "SOO"
 
 split_idx = int(0.8 * len(train_set))
@@ -405,7 +403,6 @@ train_df["PVC_numeric"] = train_df["PVC_transition"].map(pvc_map)
 
 associations = []
 
-# Afegeix això abans de començar els bucles per assegurar format numèric
 for col in numerical_features:
     train_df[col] = pd.to_numeric(train_df[col], errors="coerce")
 
@@ -537,17 +534,9 @@ print("\nOriginal X_train shape:", X_train.shape)
 print("Preprocessed X_train shape:", X_train_preprocessed.shape)
 print("\nX_train preprocessed:")
 
-# B. ECG DATA
-# The Teknon dataset has ECG signals with 4 beats, the last of which corresponds to the PVC.
-# Using the given segmentation models at models/, you will be able to retrieve all the P, QRS and T waves.
 
-# Of course, you can also use the entire signal as input for your models. In that case, take into account that each lead has different value ranges.
-# Moreover, you won't be able to combine your data with the other datasets, since they are segmented in QRS complexes.
-
-# Plot one sample
 plt.plot(teknon["I"][0])
 
-# Example with ECG segmentation
 import torch
 import sak
 from functools import partial
@@ -633,7 +622,7 @@ def predict_ecg(
     # Get dimensions
     N, L = ecg_250.shape
 
-    # (Optional) Normalize amplitudes
+    # Normalize amplitudes
     if normalize:
         # Get ecg_250 when it's not flat zero
         norm_signal = ecg_250[
@@ -643,7 +632,7 @@ def predict_ecg(
             :,
         ]
 
-        # High pass filter normalized ecg_250 to avoid issues with baseline wander
+        # High pass filter normalized ecg_250
         norm_signal = sp.signal.filtfilt(
             *sp.signal.butter(2, 0.5 / 250.0, "high"), norm_signal, axis=0
         )
@@ -660,7 +649,7 @@ def predict_ecg(
         # Apply normalization
         ecg_250 = ecg_250 / amplitude[None, :]
 
-    # (Optional) Filter ecg_250
+    # Filter ecg_250
     if filter:
         ecg_250 = sp.signal.filtfilt(
             *sp.signal.butter(2, 0.5 / 250.0, "high"), ecg_250, axis=0
@@ -675,7 +664,6 @@ def predict_ecg(
             *sp.signal.iirnotch(60, 20.0, 250.0), ecg_250, axis=0
         )
 
-    # Avoid issues with negative strides due to filtering:
     if np.any(np.array(ecg_250.strides) < 0):
         ecg_250 = ecg_250.copy()
 
@@ -758,7 +746,7 @@ for lead in StandardHeader:
     ecg_signals.append(teknon[lead][0])
 ecg_signals = np.asarray(ecg_signals).T
 
-# Apply the segmentation for a single record (make function to apply to multiple signals)
+# Apply the segmentation for a single record
 fs = 1000
 fs_high, fs_low = 0.5, 100.0
 
@@ -874,7 +862,7 @@ print(f"QRS shape: {qrs.shape}")
 print(f"QRS contains {qrs.shape[0]} samples from {qrs.shape[1]} leads")
 
 
-# DEBUG: Check segmentation
+# Check segmentation
 print(f"Segmentation shape: {segmentation.shape}")
 print(f"Segmentation dtype: {segmentation.dtype}")
 print(f"Segmentation unique values: {np.unique(segmentation)}")
@@ -899,11 +887,6 @@ for i in range(qrs.shape[1]):
 plt.tight_layout()
 plt.savefig("figures/qrs_extraction.png")
 plt.close(fig)
-
-# ============================================================
-# CELDA COMÚN: PREPROCESADO TEKNON-FOCUSED PARA LAS 3 TAREAS
-# Ejecutar una vez antes de las tres celdas de entrenamiento.
-# ============================================================
 
 import os
 import io
@@ -1145,7 +1128,6 @@ def qrs_to_fixed_raw_features(ecg_signals):
     if max_abs > 0:
         qrs = qrs / max_abs
 
-    # Mantenemos el formato original de las cachés anteriores.
     return qrs.reshape(-1)
 
 
@@ -1359,7 +1341,6 @@ def load_binary_mat_pool(path, data_key, source_name):
 
     y = np.asarray(y).astype(int)
 
-    # Convención común del notebook:
     # RVOT = 0 y LVOT = 1.
     y = np.where(y == 1, 0, 1)
 
@@ -1574,10 +1555,6 @@ def to_common_lead_major_layout(meta, qrs):
     )
 
     if np.any(teknon_mask):
-        # Teknon estaba aplanado intercalando derivaciones
-        # por instante temporal.
-        # Lo convertimos a bloques de derivación como en
-        # los datasets externos .mat.
         X_teknon = X[teknon_mask].reshape(-1, n_samples, n_leads)
 
         X[teknon_mask] = X_teknon.transpose(0, 2, 1).reshape(-1, expected_features)
@@ -2924,8 +2901,8 @@ y_holdout_raw = (
 
 # Reshape to (n, channels, length) as required by PyTorch Conv1d
 # Each ECG lead is treated as an independent channel over 120 time steps
-X_train = X_raw_train.reshape(-1, 120, 12).transpose(0, 2, 1)  # (488, 12, 120)
-X_holdout = X_raw_holdout.reshape(-1, 120, 12).transpose(0, 2, 1)  # (28, 12, 120)
+X_train = X_raw_train.reshape(-1, 120, 12).transpose(0, 2, 1)  
+X_holdout = X_raw_holdout.reshape(-1, 120, 12).transpose(0, 2, 1)  
 
 print("Train shape:", X_train.shape, "| Class distribution:", np.bincount(y_train_raw))
 print(
@@ -3258,7 +3235,7 @@ X_raw_train_full = experiment_binary["full_qrs_pool"].to_numpy(dtype=float)
 y_train_raw_full = experiment_binary["full_meta_pool"]["target"].astype(int).to_numpy()
 X_train_full = X_raw_train_full.reshape(-1, 120, 12).transpose(
     0, 2, 1
-)  # (488, 12, 120)
+)
 
 # Load holdout set
 X_raw_holdout_aug = experiment_binary["teknon_holdout_test_qrs"].to_numpy(dtype=float)
@@ -3411,7 +3388,7 @@ teknon_qrs_full = experiment_binary["full_qrs_pool"].loc[teknon_meta_full.index]
 
 X_raw_teknon = teknon_qrs_full.to_numpy(dtype=float)
 y_raw_teknon = teknon_meta_full["target"].astype(int).to_numpy()
-X_teknon = X_raw_teknon.reshape(-1, 120, 12).transpose(0, 2, 1)  # (112, 12, 120)
+X_teknon = X_raw_teknon.reshape(-1, 120, 12).transpose(0, 2, 1)
 
 # Apply augmentation to Teknon training data only
 X_teknon_aug, y_teknon_aug = augment_qrs(
