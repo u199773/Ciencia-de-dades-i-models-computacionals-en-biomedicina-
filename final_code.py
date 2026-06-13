@@ -2683,6 +2683,10 @@ cm_teknon_external = experiment_binary["cm_teknon_external"]
 
 teknon_external_acc = experiment_binary["teknon_external_acc"]
 
+
+with open("final_models/best_model_binary.pkl", "wb") as f:
+    pickle.dump(experiment_binary["best_model"], f, protocol=5)
+
 # ============================================================
 # TASK 2: INTERMEDIATE MULTI-CLASS CLASSIFICATION
 # ============================================================
@@ -2742,6 +2746,9 @@ teknon_external_acc_intermediate = experiment_intermediate["teknon_external_acc"
 teknon_external_bal_acc_intermediate = experiment_intermediate[
     "teknon_external_bal_acc"
 ]
+
+with open("final_models/best_model_intermediate.pkl", "wb") as f:
+    pickle.dump(experiment_intermediate["best_model"], f, protocol=5)
 
 # ============================================================
 # TASK 3: FINE-GRAINED MULTI-CLASS CLASSIFICATION
@@ -2807,6 +2814,9 @@ teknon_external_bal_acc_fine_grained = experiment_fine_grained[
     "teknon_external_bal_acc"
 ]
 
+with open("final_models/best_model_fine_grained.pkl", "wb") as f:
+    pickle.dump(experiment_fine_grained["best_model"], f, protocol=5)
+
 # ============================================================
 # TASKS 1, 2, 3 - WITHOUT CLINICAL FEATURES
 # ============================================================
@@ -2823,6 +2833,9 @@ experiment_binary_no_clin = run_task(
     use_clinical=False,
 )
 
+with open("final_models/best_model_binary_no_clinical.pkl", "wb") as f:
+    pickle.dump(experiment_binary_no_clin["best_model"], f, protocol=5)
+
 # Task 2 - no clinical
 experiment_intermediate_no_clin = run_task(
     task_name="intermediate_no_clinical",
@@ -2835,6 +2848,9 @@ experiment_intermediate_no_clin = run_task(
     use_clinical=False,
 )
 
+with open("final_models/best_model_intermediate_no_clinical.pkl", "wb") as f:
+    pickle.dump(experiment_intermediate_no_clin["best_model"], f, protocol=5)
+
 # Task 3 - no clinical
 experiment_fine_grained_no_clin = run_task(
     task_name="fine_grained_no_clinical",
@@ -2846,6 +2862,9 @@ experiment_fine_grained_no_clin = run_task(
     test_size=0.20,
     use_clinical=False,
 )
+
+with open("final_models/best_model_fine_grained_no_clinical.pkl", "wb") as f:
+    pickle.dump(experiment_fine_grained_no_clin["best_model"], f, protocol=5)
 
 # Best model per task segons internal test
 print("=== TASK 1 ===")
@@ -2995,6 +3014,8 @@ cv_scores_full, model_cnn_full = train_cnn_with_cv(
     batch_size=32,
     device=device,
 )
+
+torch.save(model_cnn_full.state_dict(), "final_models/cnn_all_datasets.pth")
 
 print(f"\nCross-validation results (Full dataset):")
 print(
@@ -3183,6 +3204,8 @@ plt.tight_layout()
 plt.savefig("figures/cnn_teknon_only_confusion_matrix.png")
 plt.close(fig)
 
+torch.save(model_teknon, "final_models/cnn_teknon_only.pth")
+
 # ============================================================
 # DATA AUGMENTATION - FULL TRAINING POOL (Teknon + .mat)
 # ============================================================
@@ -3338,6 +3361,8 @@ plt.title("CNN + Augmentation - Confusion Matrix")
 plt.tight_layout()
 plt.savefig("figures/cnn_augmented_confusion_matrix.png")
 plt.close(fig)
+
+torch.save(model_aug, "final_models/cnn_augmented.pth")
 
 # ============================================================
 # SHAP ANALYSIS FOR CNN + AUGMENTED MODEL
@@ -3714,6 +3739,8 @@ plt.title("CNN - Task 2 - Selective Oversampling - Confusion Matrix")
 plt.tight_layout()
 plt.savefig("figures/cnn_task2_selective_oversampling_confusion_matrix.png")
 plt.close(fig)
+
+torch.save(model_sel, "final_models/cnn_task2_selective_oversampling.pth")
 
 # ============================================================
 # HELPER FUNCTION: EVALUATE CNN ON HOLDOUT
