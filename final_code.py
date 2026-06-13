@@ -4015,3 +4015,14 @@ print("=" * 60)
 print("TASK 2 - FINAL RESULTS - TEKNON HOLDOUT")
 print("=" * 60)
 print(results_t2_final)
+
+# Number of selected QRS features per dataset and task
+for exp_name, exp in [
+    ('Task 1 (Binary)', experiment_binary),
+    ('Task 2 (Intermediate)', experiment_intermediate),
+    ('Task 3 (Fine-grained)', experiment_fine_grained)
+]:
+    print(f"\n=== {exp_name} ===")
+    for key, data in exp['balanced_datasets'].items():
+        n_feat = len(data['qrs_selector']['selected_indices'])
+        print(f"  {key}: {n_feat} features")

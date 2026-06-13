@@ -1,0 +1,1050 @@
+Loading dataset from: data/QRS_CARTO2.mat
+Number of patients: 43
+Warning: invalid label format at index 20: []
+Warning: invalid label format at index 22: []
+Warning: invalid label format at index 23: []
+Warning: invalid label format at index 25: []
+Warning: invalid label format at index 38: []
+Unique sublocation labels found: ['RCC', 'LCC', 'COMMISSURE']
+Loading dataset from: data/QRS_Database2.mat
+Number of patients: 333
+Unique sublocation labels found: ['RFW', 'RVOT Septum', 'RCC', 'LCC', 'LVOT Summit', 'LVOT Subvalvular', 'COMMISSURE']
+Loading dataset from: data/QRS_Sims2.mat
+Number of patients: 2496
+Unique sublocation labels found: ['LCC', 'COMMISSURE', 'RCC', 'LVOT Subvalvular', 'LVOT Summit', 'RVOT Septum', 'RFW']
+dict_keys(['I', 'II', 'III', 'AVR', 'AVL', 'AVF', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'Sex', 'HTA', 'Age', 'PVC_transition', 'SOO_chamber', 'Height', 'Weight', 'BMI', 'DM', 'DLP', 'Smoker', 'COPD', 'Sleep_apnea', 'CLINICAL_SCORE', 'SOO', 'OTorigin'])
+(181, 16)
+SOO_std
+RVOT Septum         50
+RFW                 42
+LVOT Subvalvular    24
+LVOT Summit         11
+RCC                  9
+LCC                  3
+COMMISURE            1
+Name: count, dtype: int64
+
+Valors NO mapejats:
+SOO
+fasciculo anterior LV    1
+anillo lat               1
+Fascículo anterior       1
+Name: count, dtype: int64
+(140, 17)
+
+Pacientes después de filtrar: 140
+['Sex', 'HTA', 'Age', 'PVC_transition', 'SOO_chamber', 'Height', 'Weight', 'BMI', 'DM', 'DLP', 'Smoker', 'COPD', 'Sleep_apnea', 'CLINICAL_SCORE', 'SOO', 'OTorigin', 'SOO_std']
+Sex                1
+HTA                4
+Age                2
+PVC_transition     4
+Height            22
+Weight            22
+BMI               65
+DM                 5
+DLP                4
+Smoker             6
+COPD               5
+Sleep_apnea        6
+CLINICAL_SCORE     5
+SOO                1
+OTorigin           1
+SOO_std            4
+dtype: int64
+(144, 14)
+
+Original X_train shape: (115, 4)
+Preprocessed X_train shape: (115, 4)
+
+X_train preprocessed:
+Found 4 QRS complexes
+Extracting QRS complex -1: samples 1913 to 2053 (duration: 140.0ms)
+QRS shape: (140, 12)
+QRS contains 140 samples from 12 leads
+Segmentation shape: (3, 2500)
+Segmentation dtype: float64
+Segmentation unique values: [0. 1.]
+QRS mask (segmentation[1,:]==1) sum: 516
+P mask (segmentation[0,:]==1) sum: 337
+T mask (segmentation[2,:]==1) sum: 928
+ECG signals shape: (2500, 12)
+Common Teknon-focused preprocessing loaded correctly.
+Official final Teknon test_set detected and kept untouched.
+
+Class distribution before QRS filtering:
+target
+0    92
+1    48
+Name: count, dtype: int64
+
+Teknon-only holdout split:
+Clase 0: 74 paciente(s) en train + 18 paciente(s) en holdout.
+Clase 1: 38 paciente(s) en train + 10 paciente(s) en holdout.
+
+Teknon-only development holdout reserved:
+target
+0    18
+1    10
+Name: count, dtype: int64
+
+Training pool by source:
+source
+QRS_Database2    333
+Teknon           112
+QRS_CARTO2        43
+Name: count, dtype: int64
+
+Training pool by class:
+target
+0    347
+1    141
+Name: count, dtype: int64
+
+----- Balanced dataset 1/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 23 selected QRS features.
+Ranking fitted on 47 unique Teknon training patients.
+Top selected QRS variables: r_peak_position_V2, wave_V2_bin_09, maximum_V4, wave_V2_bin_22, peak_to_peak_V4, max_down_slope_V4, wave_V4_bin_22, wave_V2_bin_12, global_s_progression_slope, mean_V2, middle_absolute_area_V4, wave_V2_bin_03
+Final model matrix: 29 variables (23 QRS + 6 clinical).
+
+----- Balanced dataset 2/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 18 selected QRS features.
+Ranking fitted on 32 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, maximum_V5, maximum_V6, r_minus_s_V4, r_minus_s_V5, wave_V4_bin_13, peak_to_peak_V4, s_peak_position_V3, r_minus_s_V3, max_down_slope_V4, wave_V3_bin_07, wave_V3_bin_13
+Final model matrix: 24 variables (18 QRS + 6 clinical).
+
+----- Balanced dataset 3/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 18 selected QRS features.
+Ranking fitted on 34 unique Teknon training patients.
+Top selected QRS variables: r_peak_position_V2, signed_area_V2, peak_to_peak_V4, max_down_slope_V4, maximum_V4, absolute_area_V4, wave_V2_bin_23, minimum_V2, minimum_V4, middle_absolute_area_V4, wave_V2_bin_09, wave_V2_bin_10
+Final model matrix: 24 variables (18 QRS + 6 clinical).
+
+----- Balanced dataset 4/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 19 selected QRS features.
+Ranking fitted on 39 unique Teknon training patients.
+Top selected QRS variables: wave_V2_bin_09, wave_V2_bin_23, late_absolute_area_V1, maximum_V4, absolute_area_V1, maximum_V6, r_peak_position_V2, middle_absolute_area_V4, wave_V2_bin_11, wave_V2_bin_07, rms_V4, signed_area_V2
+Final model matrix: 25 variables (19 QRS + 6 clinical).
+
+----- Balanced dataset 5/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 18 selected QRS features.
+Ranking fitted on 36 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, middle_absolute_area_V4, std_V4, r_peak_position_V2, minimum_V2, mean_V2, wave_V2_bin_09, wave_V2_bin_12, wave_V3_bin_12, minimum_II, wave_V3_bin_15, wave_V2_bin_14
+Final model matrix: 24 variables (18 QRS + 6 clinical).
+
+==============================
+BINARY - GLOBAL RESULTS
+==============================
+Internal balanced test: todas las clases están representadas.
+
+Best internal result: Dataset 1 - Logistic Regression | Accuracy 85.0% | Balanced Accuracy 85.0%
+
+==============================
+BINARY - BEST MODEL TEKNON-ONLY DEVELOPMENT HOLDOUT
+==============================
+Dataset used for training: Dataset 1
+Model: Logistic Regression
+Teknon-only development holdout: todas las clases están representadas.
+Teknon-only holdout size: 28
+Accuracy: 53.57%
+Balanced Accuracy: 52.78%
+Official final Teknon test_set detected and kept untouched.
+
+Class distribution before QRS filtering:
+target
+0    92
+1    13
+2    35
+Name: count, dtype: int64
+
+Teknon-only holdout split:
+Clase 0: 74 paciente(s) en train + 18 paciente(s) en holdout.
+Clase 1: 10 paciente(s) en train + 3 paciente(s) en holdout.
+Clase 2: 28 paciente(s) en train + 7 paciente(s) en holdout.
+
+Teknon-only development holdout reserved:
+target
+0    18
+1     3
+2     7
+Name: count, dtype: int64
+
+Training pool by source:
+source
+Teknon    112
+Name: count, dtype: int64
+
+Training pool by class:
+target
+0    74
+1    10
+2    28
+Name: count, dtype: int64
+
+----- Balanced dataset 1/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 74 unique Teknon training patients.
+Top selected QRS variables: peak_to_peak_V4, maximum_V4, middle_absolute_area_V4, max_up_slope_V4, wave_V1_bin_13, minimum_V4, wave_V2_bin_11, max_down_slope_V5, wave_V2_bin_21, rms_V4, zero_crossing_rate_V5, peak_to_peak_V2
+Final model matrix: 42 variables (37 QRS + 5 clinical).
+
+----- Balanced dataset 2/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 38 selected QRS features.
+Ranking fitted on 76 unique Teknon training patients.
+Top selected QRS variables: peak_to_peak_V4, wave_V2_bin_11, rms_V2, absolute_area_V4, mean_V2, maximum_V4, max_up_slope_V4, middle_absolute_area_V4, minimum_V4, early_absolute_area_III, maximum_V6, wave_V2_bin_21
+Final model matrix: 43 variables (38 QRS + 5 clinical).
+
+----- Balanced dataset 3/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 38 selected QRS features.
+Ranking fitted on 76 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, r_s_ratio_V1, middle_absolute_area_V2, wave_V2_bin_11, peak_to_peak_V4, rms_V2, max_down_slope_V4, r_peak_position_V2, max_up_slope_V4, minimum_V2, wave_V2_bin_14, std_V2
+Final model matrix: 44 variables (38 QRS + 6 clinical).
+
+----- Balanced dataset 4/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 75 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, absolute_area_V4, middle_absolute_area_V2, peak_to_peak_V4, wave_V2_bin_10, r_peak_position_V2, late_absolute_area_V4, middle_absolute_area_V4, wave_V2_bin_23, minimum_V2, wave_V2_bin_08, wave_V2_bin_13
+Final model matrix: 43 variables (37 QRS + 6 clinical).
+
+----- Balanced dataset 5/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 74 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, wave_V2_bin_23, std_aVR, rms_III, peak_to_peak_V4, rms_V2, middle_absolute_area_aVR, wave_V2_bin_12, middle_absolute_area_V2, r_peak_position_V2, late_absolute_area_V2, wave_V2_bin_14
+Final model matrix: 42 variables (37 QRS + 5 clinical).
+
+==============================
+INTERMEDIATE - GLOBAL RESULTS
+==============================
+Internal balanced test: todas las clases están representadas.
+
+Best internal result: Dataset 5 - Random Forest | Accuracy 75.0% | Balanced Accuracy 75.0%
+
+==============================
+INTERMEDIATE - BEST MODEL TEKNON-ONLY DEVELOPMENT HOLDOUT
+==============================
+Dataset used for training: Dataset 5
+Model: Random Forest
+Teknon-only development holdout: todas las clases están representadas.
+Teknon-only holdout size: 28
+Accuracy: 75.00%
+Balanced Accuracy: 59.79%
+Official final Teknon test_set detected and kept untouched.
+
+Class distribution before QRS filtering:
+target
+0    50
+1    42
+2     9
+3     3
+4     1
+5    11
+6    24
+Name: count, dtype: int64
+
+Teknon-only holdout split:
+Clase 0: 40 paciente(s) en train + 10 paciente(s) en holdout.
+Clase 1: 34 paciente(s) en train + 8 paciente(s) en holdout.
+Clase 2: 7 paciente(s) en train + 2 paciente(s) en holdout.
+Clase 3: 2 paciente(s) en train + 1 paciente(s) en holdout.
+[WARN] Clase 4: solo hay 1 paciente(s) Teknon único(s). Se mantienen exclusivamente en train y se excluyen del holdout Teknon-only para evitar leakage.
+Clase 5: 9 paciente(s) en train + 2 paciente(s) en holdout.
+Clase 6: 19 paciente(s) en train + 5 paciente(s) en holdout.
+
+Teknon-only development holdout reserved:
+target
+0    10
+1     8
+2     2
+3     1
+5     2
+6     5
+Name: count, dtype: int64
+
+Training pool by source:
+source
+Teknon    112
+Name: count, dtype: int64
+
+Training pool by class:
+target
+0    40
+1    34
+2     7
+3     2
+4     1
+5     9
+6    19
+Name: count, dtype: int64
+
+----- Balanced dataset 1/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 75 unique Teknon training patients.
+Top selected QRS variables: s_peak_position_V3, maximum_V4, std_V4, wave_V4_bin_22, wave_V2_bin_10, wave_V3_bin_23, rms_V4, minimum_V2, max_up_slope_aVF, zero_crossing_rate_V5, maximum_V3, wave_I_bin_21
+Final model matrix: 43 variables (37 QRS + 6 clinical).
+
+----- Balanced dataset 2/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 75 unique Teknon training patients.
+Top selected QRS variables: s_peak_position_V3, wave_V1_bin_11, maximum_V4, zero_crossing_rate_V5, wave_I_bin_21, wave_V2_bin_10, wave_I_bin_22, wave_V4_bin_22, r_peak_position_V2, max_up_slope_III, wave_V1_bin_09, maximum_V1
+Final model matrix: 42 variables (37 QRS + 5 clinical).
+
+----- Balanced dataset 3/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 38 selected QRS features.
+Ranking fitted on 77 unique Teknon training patients.
+Top selected QRS variables: zero_crossing_rate_aVL, s_peak_position_V2, max_up_slope_aVF, maximum_V3, max_up_slope_III, maximum_V1, wave_V4_bin_22, wave_I_bin_21, global_precordial_transition, wave_V2_bin_11, late_absolute_area_V1, max_down_slope_V6
+Final model matrix: 44 variables (38 QRS + 6 clinical).
+
+----- Balanced dataset 4/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 75 unique Teknon training patients.
+Top selected QRS variables: s_peak_position_III, s_peak_position_V4, s_peak_position_V3, maximum_V4, wave_V4_bin_22, wave_V2_bin_10, std_V4, max_up_slope_aVF, wave_V2_bin_23, wave_V3_bin_23, r_peak_position_aVL, s_peak_position_V5
+Final model matrix: 43 variables (37 QRS + 6 clinical).
+
+----- Balanced dataset 5/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 38 selected QRS features.
+Ranking fitted on 76 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, maximum_V3, middle_absolute_area_V4, wave_V5_bin_08, s_peak_position_V3, maximum_V5, absolute_area_V2, wave_V2_bin_09, std_V4, wave_V4_bin_23, wave_I_bin_21, wave_V3_bin_22
+Final model matrix: 44 variables (38 QRS + 6 clinical).
+
+==============================
+FINE_GRAINED - GLOBAL RESULTS
+==============================
+[WARN] Internal balanced test: estas clases no se pueden evaluar de forma independiente porque no tienen pacientes disponibles en este test: COMMISSURE
+
+Best internal result: Dataset 3 - Extra Trees | Accuracy 66.67% | Balanced Accuracy 66.67%
+
+==============================
+FINE_GRAINED - BEST MODEL TEKNON-ONLY DEVELOPMENT HOLDOUT
+==============================
+Dataset used for training: Dataset 3
+Model: Extra Trees
+[WARN] Teknon-only development holdout: estas clases no se pueden evaluar de forma independiente porque no tienen pacientes disponibles en este test: COMMISSURE
+Teknon-only holdout size: 28
+Accuracy: 42.86%
+Balanced Accuracy: 25.42%
+Official final Teknon test_set detected and kept untouched.
+
+Class distribution before QRS filtering:
+target
+0    92
+1    48
+Name: count, dtype: int64
+
+Teknon-only holdout split:
+Clase 0: 74 paciente(s) en train + 18 paciente(s) en holdout.
+Clase 1: 38 paciente(s) en train + 10 paciente(s) en holdout.
+
+Teknon-only development holdout reserved:
+target
+0    18
+1    10
+Name: count, dtype: int64
+
+Training pool by source:
+source
+QRS_Database2    333
+Teknon           112
+QRS_CARTO2        43
+Name: count, dtype: int64
+
+Training pool by class:
+target
+0    347
+1    141
+Name: count, dtype: int64
+
+----- Balanced dataset 1/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 23 selected QRS features.
+Ranking fitted on 47 unique Teknon training patients.
+Top selected QRS variables: r_peak_position_V2, wave_V2_bin_09, maximum_V4, wave_V2_bin_22, peak_to_peak_V4, max_down_slope_V4, wave_V4_bin_22, wave_V2_bin_12, global_s_progression_slope, mean_V2, middle_absolute_area_V4, wave_V2_bin_03
+Final model matrix: 23 variables (23 QRS + 0 clinical).
+
+----- Balanced dataset 2/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 18 selected QRS features.
+Ranking fitted on 32 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, maximum_V5, maximum_V6, r_minus_s_V4, r_minus_s_V5, wave_V4_bin_13, peak_to_peak_V4, s_peak_position_V3, r_minus_s_V3, max_down_slope_V4, wave_V3_bin_07, wave_V3_bin_13
+Final model matrix: 18 variables (18 QRS + 0 clinical).
+
+----- Balanced dataset 3/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 18 selected QRS features.
+Ranking fitted on 34 unique Teknon training patients.
+Top selected QRS variables: r_peak_position_V2, signed_area_V2, peak_to_peak_V4, max_down_slope_V4, maximum_V4, absolute_area_V4, wave_V2_bin_23, minimum_V2, minimum_V4, middle_absolute_area_V4, wave_V2_bin_09, wave_V2_bin_10
+Final model matrix: 18 variables (18 QRS + 0 clinical).
+
+----- Balanced dataset 4/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 19 selected QRS features.
+Ranking fitted on 39 unique Teknon training patients.
+Top selected QRS variables: wave_V2_bin_09, wave_V2_bin_23, late_absolute_area_V1, maximum_V4, absolute_area_V1, maximum_V6, r_peak_position_V2, middle_absolute_area_V4, wave_V2_bin_11, wave_V2_bin_07, rms_V4, signed_area_V2
+Final model matrix: 19 variables (19 QRS + 0 clinical).
+
+----- Balanced dataset 5/5 -----
+
+Internal balanced split:
+Clase 0: 278 paciente(s) único(s) en train + 69 paciente(s) único(s) en test.
+Clase 1: 113 paciente(s) único(s) en train + 28 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 18 selected QRS features.
+Ranking fitted on 36 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, middle_absolute_area_V4, std_V4, r_peak_position_V2, minimum_V2, mean_V2, wave_V2_bin_09, wave_V2_bin_12, wave_V3_bin_12, minimum_II, wave_V3_bin_15, wave_V2_bin_14
+Final model matrix: 18 variables (18 QRS + 0 clinical).
+
+==============================
+BINARY_NO_CLINICAL - GLOBAL RESULTS
+==============================
+Internal balanced test: todas las clases están representadas.
+
+Best internal result: Dataset 1 - SVM RBF | Accuracy 85.0% | Balanced Accuracy 85.0%
+
+==============================
+BINARY_NO_CLINICAL - BEST MODEL TEKNON-ONLY DEVELOPMENT HOLDOUT
+==============================
+Dataset used for training: Dataset 1
+Model: SVM RBF
+Teknon-only development holdout: todas las clases están representadas.
+Teknon-only holdout size: 28
+Accuracy: 60.71%
+Balanced Accuracy: 60.56%
+Official final Teknon test_set detected and kept untouched.
+
+Class distribution before QRS filtering:
+target
+0    92
+1    13
+2    35
+Name: count, dtype: int64
+
+Teknon-only holdout split:
+Clase 0: 74 paciente(s) en train + 18 paciente(s) en holdout.
+Clase 1: 10 paciente(s) en train + 3 paciente(s) en holdout.
+Clase 2: 28 paciente(s) en train + 7 paciente(s) en holdout.
+
+Teknon-only development holdout reserved:
+target
+0    18
+1     3
+2     7
+Name: count, dtype: int64
+
+Training pool by source:
+source
+Teknon    112
+Name: count, dtype: int64
+
+Training pool by class:
+target
+0    74
+1    10
+2    28
+Name: count, dtype: int64
+
+----- Balanced dataset 1/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 74 unique Teknon training patients.
+Top selected QRS variables: peak_to_peak_V4, maximum_V4, middle_absolute_area_V4, max_up_slope_V4, wave_V1_bin_13, minimum_V4, wave_V2_bin_11, max_down_slope_V5, wave_V2_bin_21, rms_V4, zero_crossing_rate_V5, peak_to_peak_V2
+Final model matrix: 37 variables (37 QRS + 0 clinical).
+
+----- Balanced dataset 2/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 38 selected QRS features.
+Ranking fitted on 76 unique Teknon training patients.
+Top selected QRS variables: peak_to_peak_V4, wave_V2_bin_11, rms_V2, absolute_area_V4, mean_V2, maximum_V4, max_up_slope_V4, middle_absolute_area_V4, minimum_V4, early_absolute_area_III, maximum_V6, wave_V2_bin_21
+Final model matrix: 38 variables (38 QRS + 0 clinical).
+
+----- Balanced dataset 3/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 38 selected QRS features.
+Ranking fitted on 76 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, r_s_ratio_V1, middle_absolute_area_V2, wave_V2_bin_11, peak_to_peak_V4, rms_V2, max_down_slope_V4, r_peak_position_V2, max_up_slope_V4, minimum_V2, wave_V2_bin_14, std_V2
+Final model matrix: 38 variables (38 QRS + 0 clinical).
+
+----- Balanced dataset 4/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 75 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, absolute_area_V4, middle_absolute_area_V2, peak_to_peak_V4, wave_V2_bin_10, r_peak_position_V2, late_absolute_area_V4, middle_absolute_area_V4, wave_V2_bin_23, minimum_V2, wave_V2_bin_08, wave_V2_bin_13
+Final model matrix: 37 variables (37 QRS + 0 clinical).
+
+----- Balanced dataset 5/5 -----
+
+Internal balanced split:
+Clase 0: 59 paciente(s) único(s) en train + 15 paciente(s) único(s) en test.
+Clase 1: 8 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 2: 22 paciente(s) único(s) en train + 6 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 74 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, wave_V2_bin_23, std_aVR, rms_III, peak_to_peak_V4, rms_V2, middle_absolute_area_aVR, wave_V2_bin_12, middle_absolute_area_V2, r_peak_position_V2, late_absolute_area_V2, wave_V2_bin_14
+Final model matrix: 37 variables (37 QRS + 0 clinical).
+
+==============================
+INTERMEDIATE_NO_CLINICAL - GLOBAL RESULTS
+==============================
+Internal balanced test: todas las clases están representadas.
+
+Best internal result: Dataset 5 - Random Forest | Accuracy 72.22% | Balanced Accuracy 72.22%
+
+==============================
+INTERMEDIATE_NO_CLINICAL - BEST MODEL TEKNON-ONLY DEVELOPMENT HOLDOUT
+==============================
+Dataset used for training: Dataset 5
+Model: Random Forest
+Teknon-only development holdout: todas las clases están representadas.
+Teknon-only holdout size: 28
+Accuracy: 75.00%
+Balanced Accuracy: 59.79%
+Official final Teknon test_set detected and kept untouched.
+
+Class distribution before QRS filtering:
+target
+0    50
+1    42
+2     9
+3     3
+4     1
+5    11
+6    24
+Name: count, dtype: int64
+
+Teknon-only holdout split:
+Clase 0: 40 paciente(s) en train + 10 paciente(s) en holdout.
+Clase 1: 34 paciente(s) en train + 8 paciente(s) en holdout.
+Clase 2: 7 paciente(s) en train + 2 paciente(s) en holdout.
+Clase 3: 2 paciente(s) en train + 1 paciente(s) en holdout.
+[WARN] Clase 4: solo hay 1 paciente(s) Teknon único(s). Se mantienen exclusivamente en train y se excluyen del holdout Teknon-only para evitar leakage.
+Clase 5: 9 paciente(s) en train + 2 paciente(s) en holdout.
+Clase 6: 19 paciente(s) en train + 5 paciente(s) en holdout.
+
+Teknon-only development holdout reserved:
+target
+0    10
+1     8
+2     2
+3     1
+5     2
+6     5
+Name: count, dtype: int64
+
+Training pool by source:
+source
+Teknon    112
+Name: count, dtype: int64
+
+Training pool by class:
+target
+0    40
+1    34
+2     7
+3     2
+4     1
+5     9
+6    19
+Name: count, dtype: int64
+
+----- Balanced dataset 1/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 75 unique Teknon training patients.
+Top selected QRS variables: s_peak_position_V3, maximum_V4, std_V4, wave_V4_bin_22, wave_V2_bin_10, wave_V3_bin_23, rms_V4, minimum_V2, max_up_slope_aVF, zero_crossing_rate_V5, maximum_V3, wave_I_bin_21
+Final model matrix: 37 variables (37 QRS + 0 clinical).
+
+----- Balanced dataset 2/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 75 unique Teknon training patients.
+Top selected QRS variables: s_peak_position_V3, wave_V1_bin_11, maximum_V4, zero_crossing_rate_V5, wave_I_bin_21, wave_V2_bin_10, wave_I_bin_22, wave_V4_bin_22, r_peak_position_V2, max_up_slope_III, wave_V1_bin_09, maximum_V1
+Final model matrix: 37 variables (37 QRS + 0 clinical).
+
+----- Balanced dataset 3/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 38 selected QRS features.
+Ranking fitted on 77 unique Teknon training patients.
+Top selected QRS variables: zero_crossing_rate_aVL, s_peak_position_V2, max_up_slope_aVF, maximum_V3, max_up_slope_III, maximum_V1, wave_V4_bin_22, wave_I_bin_21, global_precordial_transition, wave_V2_bin_11, late_absolute_area_V1, max_down_slope_V6
+Final model matrix: 38 variables (38 QRS + 0 clinical).
+
+----- Balanced dataset 4/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 37 selected QRS features.
+Ranking fitted on 75 unique Teknon training patients.
+Top selected QRS variables: s_peak_position_III, s_peak_position_V4, s_peak_position_V3, maximum_V4, wave_V4_bin_22, wave_V2_bin_10, std_V4, max_up_slope_aVF, wave_V2_bin_23, wave_V3_bin_23, r_peak_position_aVL, s_peak_position_V5
+Final model matrix: 37 variables (37 QRS + 0 clinical).
+
+----- Balanced dataset 5/5 -----
+
+Internal balanced split:
+Clase 0: 32 paciente(s) único(s) en train + 8 paciente(s) único(s) en test.
+Clase 1: 27 paciente(s) único(s) en train + 7 paciente(s) único(s) en test.
+Clase 2: 6 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+Clase 3: 1 paciente(s) único(s) en train + 1 paciente(s) único(s) en test.
+[WARN] Clase 4: solo hay 1 paciente original. Se utiliza exclusivamente en train mediante oversampling (24 filas) y se excluye del test interno para evitar leakage.
+Clase 5: 7 paciente(s) único(s) en train + 2 paciente(s) único(s) en test.
+Clase 6: 15 paciente(s) único(s) en train + 4 paciente(s) único(s) en test.
+Leakage check passed: ningún paciente original aparece a la vez en train y test.
+QRS feature reduction: 1440 raw values -> 513 candidates -> 38 selected QRS features.
+Ranking fitted on 76 unique Teknon training patients.
+Top selected QRS variables: maximum_V4, maximum_V3, middle_absolute_area_V4, wave_V5_bin_08, s_peak_position_V3, maximum_V5, absolute_area_V2, wave_V2_bin_09, std_V4, wave_V4_bin_23, wave_I_bin_21, wave_V3_bin_22
+Final model matrix: 38 variables (38 QRS + 0 clinical).
+
+==============================
+FINE_GRAINED_NO_CLINICAL - GLOBAL RESULTS
+==============================
+[WARN] Internal balanced test: estas clases no se pueden evaluar de forma independiente porque no tienen pacientes disponibles en este test: COMMISSURE
+
+Best internal result: Dataset 3 - Extra Trees | Accuracy 61.11% | Balanced Accuracy 61.11%
+
+==============================
+FINE_GRAINED_NO_CLINICAL - BEST MODEL TEKNON-ONLY DEVELOPMENT HOLDOUT
+==============================
+Dataset used for training: Dataset 3
+Model: Extra Trees
+[WARN] Teknon-only development holdout: estas clases no se pueden evaluar de forma independiente porque no tienen pacientes disponibles en este test: COMMISSURE
+Teknon-only holdout size: 28
+Accuracy: 39.29%
+Balanced Accuracy: 23.33%
+=== TASK 1 ===
+Dataset                            Dataset 1
+Model                    Logistic Regression
+CV Accuracy                            0.825
+CV Balanced Accuracy                   0.825
+Accuracy                                0.85
+Balanced Accuracy                       0.85
+Accuracy (%)                            85.0
+Balanced Accuracy (%)                   85.0
+Name: 2, dtype: object
+
+=== TASK 2 ===
+Dataset                      Dataset 5
+Model                    Random Forest
+CV Accuracy                   0.888916
+CV Balanced Accuracy          0.891111
+Accuracy                          0.75
+Balanced Accuracy                 0.75
+Accuracy (%)                      75.0
+Balanced Accuracy (%)             75.0
+Name: 20, dtype: object
+Train pool size: 488
+Holdout size: 28
+Overlap: 0
+source
+QRS_Database2    333
+Teknon           112
+QRS_CARTO2        43
+Name: count, dtype: int64
+(488, 1440)
+target
+0    347
+1    141
+Name: count, dtype: int64
+Train shape: (488, 12, 120) | Class distribution: [347 141]
+Holdout shape: (28, 12, 120) | Class distribution: [18 10]
+Device: cpu
+
+Training CNN with 5-fold stratified cross-validation...
+  CV Fold 1/5
+    Fold 1 | Val Loss: 0.6439 | Acc: 0.7551 | Bal Acc: 0.6036
+  CV Fold 2/5
+    Fold 2 | Val Loss: 0.6171 | Acc: 0.7143 | Bal Acc: 0.5750
+  CV Fold 3/5
+    Fold 3 | Val Loss: 0.6624 | Acc: 0.6837 | Bal Acc: 0.5255
+  CV Fold 4/5
+    Fold 4 | Val Loss: 0.6806 | Acc: 0.7216 | Bal Acc: 0.5603
+  CV Fold 5/5
+    Fold 5 | Val Loss: 0.6609 | Acc: 0.7216 | Bal Acc: 0.5815
+
+Cross-validation results (Full dataset):
+  CV Accuracy: 0.7193 ± 0.0227
+  CV Balanced Accuracy: 0.5692 ± 0.0259
+  CV Val Loss: 0.6530
+
+==============================
+CNN - BINARY TASK - ALL DATASETS
+==============================
+Accuracy:                  75.00%
+Balanced Accuracy:         76.11%
+Macro-average Sensitivity: 76.11%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        RVOT       0.87      0.72      0.79        18
+        LVOT       0.62      0.80      0.70        10
+
+    accuracy                           0.75        28
+   macro avg       0.74      0.76      0.74        28
+weighted avg       0.78      0.75      0.75        28
+
+              precision    recall  f1-score   support
+
+        RVOT       0.87      0.72      0.79        18
+        LVOT       0.62      0.80      0.70        10
+
+    accuracy                           0.75        28
+   macro avg       0.74      0.76      0.74        28
+weighted avg       0.78      0.75      0.75        28
+
+Macro-average sensitivity: 76.11%
+Teknon train samples: 112
+Class distribution:
+target
+0    74
+1    38
+Name: count, dtype: int64
+Train shape: (112, 12, 120) | Class distribution: [74 38]
+Holdout shape: (28, 12, 120) | Class distribution: [18 10]
+
+Training CNN (Teknon) with 5-fold stratified cross-validation...
+  CV Fold 1/5
+    Fold 1 | Val Loss: 0.4363 | Acc: 0.7826 | Bal Acc: 0.8042
+  CV Fold 2/5
+    Fold 2 | Val Loss: 0.4154 | Acc: 0.7391 | Bal Acc: 0.7708
+  CV Fold 3/5
+    Fold 3 | Val Loss: 0.6133 | Acc: 0.7273 | Bal Acc: 0.7238
+  CV Fold 4/5
+    Fold 4 | Val Loss: 0.4716 | Acc: 0.7727 | Bal Acc: 0.7952
+  CV Fold 5/5
+    Fold 5 | Val Loss: 0.4347 | Acc: 0.6818 | Bal Acc: 0.6429
+
+Cross-validation results (Teknon):
+  CV Accuracy: 0.7407 ± 0.0359
+  CV Balanced Accuracy: 0.7474 ± 0.0592
+  CV Val Loss: 0.4743
+
+==============================
+CNN - BINARY TASK - TEKNON ONLY
+==============================
+Accuracy:                  67.86%
+Balanced Accuracy:         66.11%
+Macro-average Sensitivity: 66.11%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        RVOT       0.76      0.72      0.74        18
+        LVOT       0.55      0.60      0.57        10
+
+    accuracy                           0.68        28
+   macro avg       0.66      0.66      0.66        28
+weighted avg       0.69      0.68      0.68        28
+
+Original train size: 488
+Augmented train size: 3416
+Class distribution after augmentation: [2429  987]
+
+Training CNN (Augmented) with 5-fold stratified cross-validation...
+  CV Fold 1/5
+    Fold 1 | Val Loss: 0.6382 | Acc: 0.7449 | Bal Acc: 0.5857
+  CV Fold 2/5
+    Fold 2 | Val Loss: 0.6061 | Acc: 0.7449 | Bal Acc: 0.5857
+  CV Fold 3/5
+    Fold 3 | Val Loss: 0.6611 | Acc: 0.7143 | Bal Acc: 0.5472
+  CV Fold 4/5
+    Fold 4 | Val Loss: 0.6989 | Acc: 0.7216 | Bal Acc: 0.5497
+  CV Fold 5/5
+    Fold 5 | Val Loss: 0.6593 | Acc: 0.7010 | Bal Acc: 0.5670
+
+Cross-validation results (Augmented):
+  CV Accuracy: 0.7254 ± 0.0173
+  CV Balanced Accuracy: 0.5671 ± 0.0167
+  CV Val Loss: 0.6527
+
+==============================
+CNN + AUGMENTATION - BINARY TASK RESULTS
+==============================
+Accuracy:                  67.86%
+Balanced Accuracy:         63.89%
+Macro-average Sensitivity: 63.89%
+
+Classification Report:
+              precision    recall  f1-score   support
+
+        RVOT       0.74      0.78      0.76        18
+        LVOT       0.56      0.50      0.53        10
+
+    accuracy                           0.68        28
+   macro avg       0.65      0.64      0.64        28
+weighted avg       0.67      0.68      0.67        28
+
+
+Ejecutando análisis SHAP para el modelo CNN + Augmented...
+Original train size: 112
+Augmented train size: 784
+Class distribution after augmentation: [518 266]
+
+Training CNN (Teknon + Augmented) with 5-fold stratified cross-validation...
+  CV Fold 1/5
+    Fold 1 | Val Loss: 0.4239 | Acc: 0.6087 | Bal Acc: 0.5833
+  CV Fold 2/5
+    Fold 2 | Val Loss: 0.4161 | Acc: 0.6957 | Bal Acc: 0.7375
+  CV Fold 3/5
+    Fold 3 | Val Loss: 0.6366 | Acc: 0.7273 | Bal Acc: 0.7238
+  CV Fold 4/5
+    Fold 4 | Val Loss: 0.4542 | Acc: 0.6818 | Bal Acc: 0.6905
+  CV Fold 5/5
+    Fold 5 | Val Loss: 0.3877 | Acc: 0.6818 | Bal Acc: 0.6429
+
+Cross-validation results (Teknon + Augmented):
+  CV Accuracy: 0.6791 ± 0.0389
+  CV Balanced Accuracy: 0.6756 ± 0.0565
+  CV Val Loss: 0.4637
+
+Ejecutando análisis SHAP para el modelo CNN (Teknon + Augmented)...
+Train size: 1192
+Class distribution: [518 310 364]
+
+Training CNN (Selective oversampling) with 5-fold stratified cross-validation...
+  CV Fold 1/5
+    Fold 1 | Val Loss: 0.9909 | Acc: 0.6087 | Bal Acc: 0.6222
+  CV Fold 2/5
+    Fold 2 | Val Loss: 1.1427 | Acc: 0.5652 | Bal Acc: 0.5333
+  CV Fold 3/5
+    Fold 3 | Val Loss: 0.9851 | Acc: 0.5455 | Bal Acc: 0.3111
+  CV Fold 4/5
+    Fold 4 | Val Loss: 0.9447 | Acc: 0.6364 | Bal Acc: 0.5889
+  CV Fold 5/5
+    Fold 5 | Val Loss: 1.0546 | Acc: 0.5909 | Bal Acc: 0.3413
+
+Cross-validation results (Selective oversampling):
+  CV Accuracy: 0.5893 ± 0.0319
+  CV Balanced Accuracy: 0.4794 ± 0.1286
+  CV Val Loss: 1.0236
+
+Ejecutando análisis SHAP para el modelo CNN - Task 2 Selective Oversampling...
+
+==============================
+CNN - TASK 2 - SELECTIVE OVERSAMPLING
+==============================
+Accuracy:                  57.14%
+Balanced Accuracy:         44.71%
+Macro-average Sensitivity: 44.71%
+
+Classification Report:
+                         precision    recall  f1-score   support
+
+        RVOT Septum/RFW       0.76      0.72      0.74        18
+     RCC/LCC/COMMISSURE       0.20      0.33      0.25         3
+LVOT Summit/Subvalvular       0.33      0.29      0.31         7
+
+               accuracy                           0.57        28
+              macro avg       0.43      0.45      0.43        28
+           weighted avg       0.60      0.57      0.58        28
+
+============================================================
+TASK 1 - FINAL RESULTS - TEKNON HOLDOUT
+============================================================
+                 Model  ... Macro Sensitivity (%)
+0                  CNN  ...                 76.11
+1                  CNN  ...                 66.11
+2   CNN + Augmentation  ...                 63.89
+3              SVM RBF  ...                 60.56
+4   CNN + Augmentation  ...                 53.33
+5  Logistic Regression  ...                 52.78
+
+[6 rows x 6 columns]
+============================================================
+TASK 2 - FINAL RESULTS - TEKNON HOLDOUT
+============================================================
+                          Model  ... Macro Sensitivity (%)
+0                 Random Forest  ...                 59.79
+1                 Random Forest  ...                 59.79
+2  CNN + Selective Oversampling  ...                 44.71
+
+[3 rows x 6 columns]
+
+=== Task 1 (Binary) ===
+  dataset_1: 23 features
+  dataset_2: 18 features
+  dataset_3: 18 features
+  dataset_4: 19 features
+  dataset_5: 18 features
+
+=== Task 2 (Intermediate) ===
+  dataset_1: 37 features
+  dataset_2: 38 features
+  dataset_3: 38 features
+  dataset_4: 37 features
+  dataset_5: 37 features
+
+=== Task 3 (Fine-grained) ===
+  dataset_1: 37 features
+  dataset_2: 37 features
+  dataset_3: 38 features
+  dataset_4: 37 features
+  dataset_5: 38 features

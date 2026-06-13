@@ -43,7 +43,7 @@ Open a command prompt in the repository root and run:
 
 ```powershell
 python -m pip install -r requirements.txt
-python final_code.py
+python final_code.py | tee output.txt
 ```
 
 ## Expected outputs
